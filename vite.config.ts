@@ -1,25 +1,17 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import eslint from "vite-plugin-eslint";
 import { visualizer } from "rollup-plugin-visualizer";
 import { VitePWA } from "vite-plugin-pwa";
-import path from "path";
 import { fileURLToPath } from "url";
-import { dirname } from "path";
+import { dirname, resolve } from "path";
+import tailwindcss from "@tailwindcss/vite";
+import alias from "@rollup/plugin-alias";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+const projectRootDir = resolve(__dirname);
 
 export default defineConfig(({ mode }) => ({
   base: mode === "production" ? "/build/" : "/",
-
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-      "@ui": path.resolve(__dirname, "./src/components/ui"),
-      "@layout": path.resolve(__dirname, "./src/components/layout"),
-      "@pages": path.resolve(__dirname, "./src/pages"),
-    },
-  },
 
   build: {
     sourcemap: mode !== "production",
@@ -40,6 +32,40 @@ export default defineConfig(({ mode }) => ({
   },
 
   plugins: [
+    tailwindcss(),
+    alias({
+      entries: [
+        {
+          find: "@",
+          replacement: resolve(projectRootDir, "./src"),
+        },
+        {
+          find: "@pages",
+          replacement: resolve(projectRootDir, "./src/pages"),
+        },
+        {
+          find: "@utils",
+          replacement: resolve(projectRootDir, "./src/utils"),
+        },
+        {
+          find: "@layouts",
+          replacement: resolve(projectRootDir, "./src/components/layout"),
+        },
+        {
+          find: "@ui",
+          replacement: resolve(projectRootDir, "./src/components/ui"),
+        },
+        {
+          find: "@routers",
+          replacement: resolve(projectRootDir, "./src/routers/"),
+        },
+        {
+          find: "@assets",
+          replacement: resolve(projectRootDir, "./src/assets"),
+        },
+      ],
+    }),
+
     react({
       babel: {
         plugins: [
@@ -49,13 +75,6 @@ export default defineConfig(({ mode }) => ({
           ],
         ],
       },
-    }),
-
-    eslint({
-      cache: true,
-      fix: true,
-      include: ["src/**/*.{ts,tsx}"],
-      exclude: ["node_modules", "dist"],
     }),
 
     mode === "analyze" &&

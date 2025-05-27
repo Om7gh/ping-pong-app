@@ -6,7 +6,15 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-
+    "paths": {
+      "@/*": ["./src/*"],
+      "@ui": ["./src/components/ui/index"],
+      "@layouts": ["./src/components/layout/index"],
+      "@pages": ["./src/pages/index"], // Points to barrel file
+      "@utils": ["./src/utils/index"],
+      "@routers": ["./src/routers/index"],
+      "@assets": ["./src/assets/index"]
+    },
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
