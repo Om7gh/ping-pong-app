@@ -1,10 +1,19 @@
 import { useState, type JSX } from "react";
 
-export default function LandingNavbar(): JSX.Element {
+export default function LandingNavbar({
+  mobile = false,
+}: {
+  mobile?: boolean;
+}): JSX.Element {
   const [active, setActive] = useState<number>(0);
   const links = ["Home", "About", "Features"];
   return (
-    <ul className="flex gap-7 tracking-wider items-center text-slate-100 font-medium text-xl">
+    <ul
+      className={
+        mobile
+          ? "flex flex-col space-y-2 text-center text-xl"
+          : "flex space-x-8"
+      }>
       {links.map((el, index) => (
         <li key={index}>
           <a

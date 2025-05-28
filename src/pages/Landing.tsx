@@ -1,13 +1,22 @@
 import About from "@/components/layout/About";
 import Features from "@/components/layout/Features";
+import LandingFooter from "@/components/layout/LandingFooter";
+import StartNow from "@/components/layout/StartNow";
 import LandingHero from "@/components/ui/LandingHero";
+import { LandingHeader } from "@layouts";
 
 export default function Landing() {
   return (
-    <div className="max-w-[1200px] m-auto min-h-full px-4 py-2">
-      <LandingHero />
-      <About />
-      <Features />
+    <div className="relative">
+      <LandingHeader />
+      <main className="max-w-[1200px] mx-auto px-4 pt-20 pb-2 space-y-20">
+        <LandingHero />
+        <About />
+        <Features />
+        <StartNow />
+        <div className="w-full h-[0.1px] bg-slate-500 opacity-20 my-5"></div>
+        <LandingFooter />
+      </main>
     </div>
   );
 }

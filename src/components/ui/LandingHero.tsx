@@ -1,34 +1,39 @@
 import type { JSX } from "react";
 import Button from "./Button";
 import Balls from "./Balls";
-import LandingHeader from "../layout/LandingHeader";
 
 export default function LandingHero(): JSX.Element {
   return (
-    <>
-      <LandingHeader />
-      <main className="h-[75vh] max-w-[1200px] mt-7 relative">
+    <div className="min-h-screen flex flex-col">
+      <main className="flex-grow flex items-center justify-center relative overflow-hidden">
         <Balls />
-        <section className="w-full absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]">
-          <div className="text-center">
-            <h1 className="text-slate-100 text-7xl mb-5 font-semibold tracking-wider">
-              Serve, Smash, Dominate!
+
+        <section className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-10 py-20 relative z-10">
+          <div className="text-center space-y-6 md:space-y-8">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-teal-400 via-amber-300 to-orange-500 bg-clip-text text-transparent tracking-tight">
+              Serve, Smash, <span className="whitespace-nowrap">Dominate!</span>
             </h1>
-            <h2 className="mb-5 text-slate-400 font-bold text-xl tracking-widest font-[Montserrat] line-height">
+
+            <h2 className="text-lg sm:text-xl md:text-2xl text-gray-300 font-medium max-w-3xl mx-auto leading-relaxed">
               Play the most addictive ping pong game online. Challenge friends,
               unlock power-ups, and rule the leaderboards!
             </h2>
-            <div className="cta-btn tracking-widest">
-              <Button type="signUp" className="w-60 text-xl">
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+              <Button
+                type="signUp"
+                className="px-8 py-3 sm:py-4 text-lg font-semibold w-full sm:w-auto hover:scale-105 transition-transform">
                 Play Free
               </Button>
-              <Button type="signIn" className="w-60 text-xl">
+              <Button
+                type="signIn"
+                className="px-8 py-3 sm:py-4 text-lg font-semibold w-full sm:w-auto bg-transparent border-2 border-teal-400 text-teal-400 hover:bg-teal-400/10 hover:scale-105 transition-transform tracking-widest">
                 Watch Trailer
               </Button>
             </div>
           </div>
         </section>
       </main>
-    </>
+    </div>
   );
 }

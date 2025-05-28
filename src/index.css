@@ -13,6 +13,7 @@ html {
   font-style: normal;
   user-select: none;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 .Child {
   width: 100vw;
@@ -40,4 +41,66 @@ html {
 
 .line-height {
   line-height: 2;
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+  background: #2c3e50; /* dark blue like a table */
+}
+
+::-webkit-scrollbar-track {
+  border-left: 1px dashed rgba(255, 255, 255, 0.2); /* net-like effect */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffeb3b; /* ball yellow */
+  border-radius: 50%; /* makes it round like a ball */
+  border: 2px solid #e53935; /* paddle red */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffc107; /* brighter yellow on hover */
+}
+
+.cercle {
+  position: relative;
+}
+
+.cercle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  border: 3px solid teal;
+  filter: blur(10px);
+}
+
+.cercle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  border: 3px solid teal;
+  filter: blur(10px);
+}
+
+.font-bold-effect {
+  font-family: "Bungee", sans-serif;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2); /* Fake boldness */
+  transform: scale(1.02); /* Slight stretch */
+}
+
+/* "Lighter" effect */
+.font-light-effect {
+  font-family: "Bungee", sans-serif;
+  opacity: 0.8;
+  filter: brightness(1.1);
 }

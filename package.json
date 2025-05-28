@@ -7,13 +7,18 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "json-server ./src/utils/auth.json  --port 3001"
   },
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
+    "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/vite": "^4.1.7",
     "babel-plugin-styled-components": "^2.1.4",
+    "json-server": "^1.0.0-beta.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.1",
     "tailwindcss": "^4.1.7"
   },
