@@ -1,7 +1,9 @@
 import { Banner } from "@/assets";
 import type { JSX } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function StartNow(): JSX.Element {
+  const navigate = useNavigate();
   return (
     <section className="p-4">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 rounded-2xl border-2 border-teal-500 ring-4 ring-teal-800/50 p-4 bg-gray-900/50 backdrop-blur-sm overflow-hidden">
@@ -21,7 +23,12 @@ export default function StartNow(): JSX.Element {
           <p className="text-slate-300/80">
             Join the ultimate ping pong experience with stunning fantasy arenas
           </p>
-          <button className="px-8 py-3 rounded-full bg-gradient-to-r from-teal-500 to-orange-500 text-white font-bold hover:from-teal-600 hover:to-orange-600 transition-all shadow-lg hover:shadow-teal-500/30 hover:scale-105">
+          <button
+            className="px-8 py-3 rounded-full bg-gradient-to-r from-teal-500 to-orange-500 text-white font-bold hover:from-teal-600 hover:to-orange-600 transition-all shadow-lg hover:shadow-teal-500/30 hover:scale-105"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/auth/signin");
+            }}>
             Play Now →
           </button>
         </div>

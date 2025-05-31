@@ -1,8 +1,10 @@
 import type { JSX } from "react";
 import Button from "./Button";
 import Balls from "./Balls";
+import { useNavigate } from "react-router-dom";
 
 export default function LandingHero(): JSX.Element {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow flex items-center justify-center relative overflow-hidden">
@@ -22,12 +24,19 @@ export default function LandingHero(): JSX.Element {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
               <Button
                 type="signUp"
-                className="px-8 py-3 sm:py-4 text-lg font-semibold w-full sm:w-auto hover:scale-105 transition-transform">
+                className="px-8 py-3 sm:py-4 text-lg font-semibold w-full sm:w-auto hover:scale-105 transition-transform"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/auth/signup");
+                }}>
                 Play Free
               </Button>
               <Button
                 type="signIn"
-                className="px-8 py-3 sm:py-4 text-lg font-semibold w-full sm:w-auto bg-transparent border-2 border-teal-400 text-teal-400 hover:bg-teal-400/10 hover:scale-105 transition-transform tracking-widest">
+                className="px-8 py-3 sm:py-4 text-lg font-semibold w-full sm:w-auto bg-transparent border-2 border-teal-400 text-teal-400 hover:bg-teal-400/10 hover:scale-105 transition-transform tracking-widest"
+                onClick={(e) => {
+                  e.preventDefault();
+                }}>
                 Watch Trailer
               </Button>
             </div>

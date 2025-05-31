@@ -3,7 +3,7 @@ type ButtonProps = {
   className?: string;
   variant?: "default" | "primary" | "outline";
   children: React.ReactNode;
-  onClick: React.ReactEventHandler;
+  onClick?: React.ReactEventHandler;
 };
 
 export default function Button({
@@ -11,7 +11,7 @@ export default function Button({
   className = "",
   variant = "default",
   children,
-  onClick,
+  onClick = () => {},
 }: ButtonProps) {
   const baseStyles =
     "rounded-md font-medium transition-all px-4 py-3 cursor-pointer";

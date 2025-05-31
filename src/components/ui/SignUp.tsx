@@ -31,7 +31,7 @@ export default function SignUp() {
           <p className="mt-2 text-center text-sm text-slate-400">
             Already a player?{" "}
             <Link
-              to="/connection/signin"
+              to="/auth/signin"
               className="font-medium text-teal-400 hover:text-teal-300 underline underline-offset-4">
               Sign in here
             </Link>

@@ -21,7 +21,7 @@ export default function LandingNavBtn({
         variant={mobile ? "outline" : "default"}
         onClick={(e) => {
           e.preventDefault();
-          navigate("/connection/signin");
+          navigate("/auth/signin");
         }}>
         Sign In
       </Button>
@@ -31,7 +31,7 @@ export default function LandingNavBtn({
         variant={mobile ? "default" : "primary"}
         onClick={(e) => {
           e.preventDefault();
-          navigate("/connection/signup");
+          navigate("/auth/signup");
         }}>
         Sign Up
       </Button>

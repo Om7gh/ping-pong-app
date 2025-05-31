@@ -55,7 +55,7 @@ export default function About() {
         <span className="absolute left-0 right-0 mx-auto text-6xl sm:text-7xl md:text-8xl text-slate-300 opacity-5 font-bold pointer-events-none select-none">
           About
         </span>
-        <h2 className="text-3xl sm:text-4xl font-bold relative z-10 text-slate-400 bg-gradient-to-r from-teal-400 to-orange-300 bg-clip-text">
+        <h2 className="text-3xl sm:text-4xl font-bold relative z-10 bg-gradient-to-r from-teal-400 to-orange-300 bg-clip-text text-transparent">
           About PingPop
         </h2>
       </div>

@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { Landing, Dashboard, Connection } from "@pages";
+import { Landing, Dashboard, Auth } from "@pages";
 import SignUp, { signUpAction } from "@/components/ui/SignUp";
 import SignIn from "@/components/ui/SignIn";
 import { signInAction } from "@/components/ui/SignIn";
@@ -8,14 +8,35 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+    children: [
+      {
+        path: "home",
+      },
+      {
+        path: "settings",
+      },
+      {
+        path: "games",
+      },
+      {
+        path: "chat",
+      },
+      {
+        path: "friends",
+      },
+      {
+        index: true,
+        element: <Navigate to="home" replace={true} />,
+      },
+    ],
   },
   {
     path: "/",
     element: <Landing />,
   },
   {
-    path: "/connection",
-    element: <Connection />,
+    path: "/auth",
+    element: <Auth />,
     children: [
       {
         path: "signup",
