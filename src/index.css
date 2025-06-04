@@ -15,10 +15,26 @@ html {
   min-height: 100vh;
   overflow-x: hidden;
 }
+
 .Child {
   width: 100vw;
   backdrop-filter: blur(50px);
   min-height: 100vh;
+}
+
+@keyframes dropdown {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-dropdown {
+  animation: dropdown 0.2s ease-out forwards;
 }
 
 @theme {
@@ -30,7 +46,7 @@ html {
     @apply text-slate-100 hover:text-teal-500 transition duration-150;
   }
   .active {
-    @apply text-teal-500;
+    @apply text-teal-500  px-4 py-2 rounded-lg;
   }
 }
 /* Second Color (Bottom) */
@@ -43,7 +59,7 @@ html {
   line-height: 2;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 14px;
   background: #2c3e50; /* dark blue like a table */
 }
@@ -60,7 +76,7 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #ffc107; /* brighter yellow on hover */
-}
+} */
 
 .cercle {
   position: relative;

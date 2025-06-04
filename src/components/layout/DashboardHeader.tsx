@@ -1,23 +1,14 @@
-import { Logo } from "@/assets";
 import { type JSX } from "react";
-import { NavLink } from "react-router-dom";
+import { Profile, SearchBar } from "../ui";
 
 export default function DashboardHeader(): JSX.Element {
-  const menu = ["Home", "Settings", "Games", "Chat", "Friends"];
   return (
-    <header>
-      <nav>
-        <Logo />
-        <ul>
-          {menu &&
-            menu.map((el, index) => (
-              <li key={index}>
-                <NavLink to={el}>{el}</NavLink>
-              </li>
-            ))}
-        </ul>
-      </nav>
+    <header className="col-span-1 md:col-span-2 row-start-1 row-end-2  py-3 px-12 flex justify-between h-25 items-center bg-slate-950 border-b-1 border-gray-600">
+      <h2 className="text-2xl text-slate-200">Dashboard</h2>
+      <div className="flex gap-6 items-center justify-end">
+        <SearchBar />
+        <Profile />
+      </div>
     </header>
   );
 }
-

@@ -1,8 +1,18 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { Landing, Dashboard, Auth } from "@pages";
+import {
+  Landing,
+  Dashboard,
+  Auth,
+  Settings,
+  Games,
+  Chat,
+  Friends,
+  Profile,
+} from "@pages";
 import SignUp, { signUpAction } from "@/components/ui/SignUp";
 import SignIn from "@/components/ui/SignIn";
 import { signInAction } from "@/components/ui/SignIn";
+import { HomeDashboard } from "@/components/layout";
 
 const router = createBrowserRouter([
   {
@@ -11,22 +21,31 @@ const router = createBrowserRouter([
     children: [
       {
         path: "home",
+        element: <HomeDashboard />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
       {
         path: "settings",
+        element: <Settings />,
       },
       {
         path: "games",
+        element: <Games />,
       },
       {
         path: "chat",
+        element: <Chat />,
       },
       {
         path: "friends",
+        element: <Friends />,
       },
       {
         index: true,
-        element: <Navigate to="home" replace={true} />,
+        element: <Navigate to="home" replace />,
       },
     ],
   },
@@ -49,7 +68,7 @@ const router = createBrowserRouter([
       {
         path: "signin",
         element: <SignIn />,
-        action: signInAction, // Add if you have sign in logic
+        action: signInAction,
         loader: () => {
           return null;
         },

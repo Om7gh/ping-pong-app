@@ -1,5 +1,5 @@
 type ButtonProps = {
-  type: "signIn" | "signUp";
+  type: "signIn" | "signUp" | "logout";
   className?: string;
   variant?: "default" | "primary" | "outline";
   children: React.ReactNode;

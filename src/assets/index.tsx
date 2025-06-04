@@ -11,4 +11,4 @@ export { default as Single } from "./features/3.png";
 export { default as Banner } from "./banner1.png";
 export { default as Logo } from "./logo.png";
 export { default as Login } from "./login3.png";
-// export { default as Login } from "./login.png";
+export { default as Avatar } from "./avatar.png";

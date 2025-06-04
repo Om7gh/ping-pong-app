@@ -5,7 +5,6 @@ export default function TournamentFeature(): JSX.Element {
   return (
     <section className="py-12 md:py-24 px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
-        {/* Text Content - Second on mobile */}
         <div className="flex flex-col justify-center gap-4 md:gap-6 relative order-2 lg:order-1">
           <span className="hidden lg:block text-8xl font-bold absolute top-[-50px] left-[-60px] opacity-10 text-teal-400 select-none pointer-events-none">
             1
@@ -56,7 +55,6 @@ export default function TournamentFeature(): JSX.Element {
           </blockquote>
         </div>
 
-        {/* Image Section - First on mobile */}
         <div className="relative order-1 lg:order-2 flex justify-center">
           <div className="relative w-full max-w-md">
             <img
@@ -64,7 +62,6 @@ export default function TournamentFeature(): JSX.Element {
               alt="Competitive ping pong tournament scene"
               className="w-full h-auto object-contain rounded-xl shadow-2xl"
             />
-            {/* Decorative circle */}
             <div className="absolute -z-10 inset-0 rounded-full bg-teal-500/10 blur-xl" />
           </div>
         </div>
