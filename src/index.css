@@ -61,21 +61,21 @@ html {
 
 /* ::-webkit-scrollbar {
   width: 14px;
-  background: #2c3e50; /* dark blue like a table */
+  background: #2c3e50;
 }
 
 ::-webkit-scrollbar-track {
-  border-left: 1px dashed rgba(255, 255, 255, 0.2); /* net-like effect */
+  border-left: 1px dashed rgba(255, 255, 255, 0.2);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ffeb3b; /* ball yellow */
-  border-radius: 50%; /* makes it round like a ball */
-  border: 2px solid #e53935; /* paddle red */
+  background: #ffeb3b;
+  border-radius: 50%;
+  border: 2px solid #e53935;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ffc107; /* brighter yellow on hover */
+  background: #ffc107;
 } */
 
 .cercle {
