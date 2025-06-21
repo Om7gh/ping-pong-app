@@ -12,7 +12,7 @@
       "@layouts": ["./src/components/layout/index"],
       "@pages": ["./src/pages/index"],
       "@utils": ["./src/utils/index"],
-      "@routers": ["./src/routers/index"],
+      "@routers": ["./src/routers/index"]
     }
   }
 }
