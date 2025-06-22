@@ -3,6 +3,7 @@ type ButtonProps = {
   className?: string;
   variant?: "default" | "primary" | "outline";
   children: React.ReactNode;
+  disabled?: boolean;
   onClick?: React.ReactEventHandler;
 };
 
@@ -11,6 +12,7 @@ export default function Button({
   className = "",
   variant = "default",
   children,
+  disabled,
   onClick = () => {},
 }: ButtonProps) {
   const baseStyles =
@@ -23,6 +25,7 @@ export default function Button({
 
   return (
     <button
+      disabled={disabled}
       className={`${baseStyles} ${variantStyles[variant]} ${className}`}
       data-type={type}
       onClick={onClick}>
