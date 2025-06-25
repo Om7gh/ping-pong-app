@@ -15,7 +15,7 @@ export default function LeftSideDashboard() {
   ];
 
   return (
-    <aside className=" bg-slate-950 p-6  col-start-1 row-start-2 row-end-3 border-r-2 border-gray-600">
+    <aside className=" bg-slate-950/40 p-6  col-start-1 row-start-2 row-end-3 border-r-2 border-gray-600">
       <div className="mb-8 flex justify-center">
         <img src={Logo} alt="logo" className="h-20 w-auto" />
       </div>

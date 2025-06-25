@@ -3,7 +3,7 @@ import { routes } from "@routers";
 import type { JSX } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
-
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const queryClient = new QueryClient();
 
 const App = (): JSX.Element => {
@@ -11,6 +11,7 @@ const App = (): JSX.Element => {
     <div className="App">
       <div className="Child bg-midnight">
         <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
           <ToastContainer />
           <RouterProvider router={routes} />
         </QueryClientProvider>

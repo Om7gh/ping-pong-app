@@ -9,7 +9,7 @@ export default function Profile(): JSX.Element {
   return (
     <div className="relative">
       <div
-        className="h-12 w-12 rounded-full grid place-items-center bg-gradient-to-r from-orange-400 to-orange-600 cursor-pointer hover:from-orange-500 hover:to-orange-800 transition-all duration-300 p-0.5"
+        className="h-14 w-14 rounded-full grid place-items-center bg-gradient-to-r from-teal-400/30 to-teal-600/30 cursor-pointer hover:from-teal-500/30 hover:to-teal-800/30 transition-all duration-300 p-0.5 z-50"
         onClick={() => setActive(!active)}>
         <div className="relative">
           <img
@@ -17,7 +17,7 @@ export default function Profile(): JSX.Element {
             alt="avatar"
             className="h-10 w-10 rounded-full object-cover border-2 border-white"
           />
-          <div className="absolute -bottom-1 -right-1 bg-orange-400 rounded-full p-1">
+          <div className="absolute -bottom-1 -right-1 bg-slate-800 rounded-full p-1">
             {active ? (
               <ChevronUpIcon className="h-3 w-3 text-white" />
             ) : (
@@ -35,22 +35,33 @@ export default function Profile(): JSX.Element {
           <ul className="divide-y divide-gray-100">
             <li className="hover:bg-gray-50 transition-colors">
               <Link
+                to="home"
+                className="block px-4 py-3 text-sm text-gray-700"
+                onClick={() => setActive(false)}>
+                Home
+              </Link>
+            </li>
+            <li className="hover:bg-gray-50 transition-colors">
+              <Link
                 to="profile"
-                className="block px-4 py-3 text-sm text-gray-700">
+                className="block px-4 py-3 text-sm text-gray-700"
+                onClick={() => setActive(false)}>
                 My Profile
               </Link>
             </li>
             <li className="hover:bg-gray-50 transition-colors">
               <Link
                 to="settings"
-                className="block px-4 py-3 text-sm text-gray-700">
+                className="block px-4 py-3 text-sm text-gray-700"
+                onClick={() => setActive(false)}>
                 Settings
               </Link>
             </li>
             <li className="hover:bg-gray-50 transition-colors">
               <Link
                 to="/auth/signin"
-                className="block px-4 py-3 text-sm text-red-500 hover:text-red-600">
+                className="block px-4 py-3 text-sm text-red-500 hover:text-red-600"
+                onClick={() => setActive(false)}>
                 Logout
               </Link>
             </li>
