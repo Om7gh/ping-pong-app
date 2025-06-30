@@ -17,13 +17,7 @@ export default function Games() {
     setClickedPlayer(target.id);
   }
 
-  //   const currentPlayer = [
-  //     {
-  //       username: "omar",
-  //       avatar: "ffff",
-  //       id: 5,
-  //     },
-  //   ];
+  if (players === undefined) return <p>error </p>;
   const currentPlayer = players.filter(
     ({ id }: { id: number }) => id === clickedPlayer
   );
