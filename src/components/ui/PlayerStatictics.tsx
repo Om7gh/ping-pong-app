@@ -21,7 +21,7 @@ export default function PlayerStatistics() {
       <h3 className="text-lg font-medium text-slate-300 mb-4">
         Weekly Performance <span className="text-orange-500">Trend</span>
       </h3>
-      <ResponsiveContainer width={500} height={250}>
+      <ResponsiveContainer width="100%" height={250}>
         <LineChart data={lineData}>
           <XAxis
             dataKey="day"
