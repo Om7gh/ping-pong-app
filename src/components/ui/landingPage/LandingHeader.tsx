@@ -1,7 +1,5 @@
 import { useState, type JSX } from "react";
-import LandingNavbar from "../ui/LandingNavbar";
-import { Logo } from "@ui";
-import LandingNavBtn from "../ui/LandingNavBtn";
+import { LandingNavbar, LandingNavBtn, Logo } from "@ui";
 
 export default function LandingHeader(): JSX.Element {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);

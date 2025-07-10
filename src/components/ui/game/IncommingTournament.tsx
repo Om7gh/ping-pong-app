@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Button from "./Button";
+import Button from "../utils/Button";
+
 
 interface Tournament {
   id: string;

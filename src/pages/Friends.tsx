@@ -1,4 +1,4 @@
-import Titles from "@/components/ui/Titles";
+import Titles from "@/components/ui/utils/Titles";
 
 export default function friends() {
   return (

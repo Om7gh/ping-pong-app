@@ -1,9 +1,7 @@
 import About from "@/components/layout/About";
 import Features from "@/components/layout/Features";
-import LandingFooter from "@/components/layout/LandingFooter";
 import StartNow from "@/components/layout/StartNow";
-import LandingHero from "@/components/ui/LandingHero";
-import { LandingHeader } from "@layouts";
+import { LandingFooter, LandingHeader, LandingHero } from "@/components/ui";
 
 export default function Landing() {
   return (

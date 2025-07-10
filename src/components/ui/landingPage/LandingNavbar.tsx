@@ -2,8 +2,10 @@ import { useState, type JSX } from "react";
 
 export default function LandingNavbar({
   mobile = false,
+  className,
 }: {
   mobile?: boolean;
+  className?: string;
 }): JSX.Element {
   const [active, setActive] = useState<number>(0);
   const links = ["Home", "About", "Features"];
@@ -27,4 +29,3 @@ export default function LandingNavbar({
     </ul>
   );
 }
-

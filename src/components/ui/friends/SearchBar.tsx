@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import InputField from "./InputField";
 import { IoSearchSharp, IoCloseSharp } from "react-icons/io5";
 
 export default function SearchBar() {

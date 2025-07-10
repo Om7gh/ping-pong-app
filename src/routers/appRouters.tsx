@@ -1,18 +1,12 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
-import {
-  Landing,
-  Dashboard,
-  Auth,
-  Settings,
-  Games,
-  Chat,
-  Friends,
-  Profile,
-} from "@pages";
-import SignUp, { signUpAction } from "@/components/ui/SignUp";
-import SignIn from "@/components/ui/SignIn";
-import { signInAction } from "@/components/ui/SignIn";
 import { HomeDashboard } from "@/components/layout";
+import { Activation, FinishRegister, SignIn, SignUp } from "@/components/ui";
+import { activatedAction } from "@/components/ui/auth/Activation";
+import { avatarAction } from "@/components/ui/auth/FinishRegister";
+import { signInAction } from "@/components/ui/auth/SignIn";
+import { signUpAction } from "@/components/ui/auth/SignUp";
+import { Auth, Chat, Dashboard, Friends, Games, Landing, Profile, Settings } from "@/pages";
+import { settingHandler } from "@/pages/Settings";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +24,7 @@ const router = createBrowserRouter([
       {
         path: "settings",
         element: <Settings />,
+        action: settingHandler,
       },
       {
         path: "games",
@@ -61,17 +56,21 @@ const router = createBrowserRouter([
         path: "signup",
         element: <SignUp />,
         action: signUpAction,
-        loader: () => {
-          return null;
-        },
       },
       {
         path: "signin",
         element: <SignIn />,
         action: signInAction,
-        loader: () => {
-          return null;
-        },
+      },
+      {
+        path: "avatar",
+        element: <FinishRegister />,
+        action: avatarAction,
+      },
+      {
+        path: "activation",
+        element: <Activation />,
+        action: activatedAction,
       },
       {
         index: true,

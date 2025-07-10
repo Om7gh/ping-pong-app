@@ -1,7 +1,7 @@
 import type { JSX } from "react";
-import TournamentFeature from "../ui/TournamentFeature";
-import MultiPlayerFeature from "../ui/MultiPlayerFeature";
-import SignlePlayerFeature from "../ui/SignlePlayerFeature";
+import TournamentFeature from "../ui/landingPage/TournamentFeature";
+import MultiPlayerFeature from "../ui/game/MultiPlayerFeature";
+import SignlePlayerFeature from "../ui/landingPage/SignlePlayerFeature";
 
 export default function Features(): JSX.Element {
   return (

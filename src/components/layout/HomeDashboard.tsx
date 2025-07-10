@@ -1,7 +1,7 @@
-import MyGamesHistory from "../ui/MyGamesHistory";
-import PlayerChart from "../ui/PlayerChart";
-import PlayerStatistics from "../ui/PlayerStatictics";
-import TopPlayers from "../ui/TopPlayers";
+import MyGamesHistory from "../ui/dashboard/MyGamesHistory";
+import PlayerChart from "../ui/dashboard/PlayerChart";
+import PlayerStatistics from "../ui/dashboard/PlayerStatictics";
+import TopPlayers from "../ui/dashboard/TopPlayers";
 
 export default function HomeDashboard() {
   return (

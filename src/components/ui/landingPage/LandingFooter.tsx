@@ -1,5 +1,5 @@
 import type { JSX } from "react";
-import LandingNavbar from "../ui/LandingNavbar";
+import LandingNavbar from "./LandingNavbar";
 
 export default function LandingFooter(): JSX.Element {
   return (

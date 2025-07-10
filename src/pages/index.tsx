@@ -6,4 +6,3 @@ export { default as Chat } from "./Chat";
 export { default as Friends } from "./Friends";
 export { default as Games } from "./games/Games";
 export { default as Profile } from "./Profile";
-

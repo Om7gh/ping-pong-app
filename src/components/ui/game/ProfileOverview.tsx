@@ -1,4 +1,5 @@
-import Button from "./Button";
+import Button from "../utils/Button";
+
 
 interface ProfileDataType {
   username: string;

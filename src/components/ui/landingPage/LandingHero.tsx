@@ -1,7 +1,7 @@
 import type { JSX } from "react";
-import Button from "./Button";
-import Balls from "./Balls";
 import { useNavigate } from "react-router-dom";
+import Balls from "../utils/Balls";
+import Button from "../utils/Button";
 
 export default function LandingHero(): JSX.Element {
   const navigate = useNavigate();
