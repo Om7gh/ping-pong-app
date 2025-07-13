@@ -22,14 +22,14 @@ html {
   min-height: 100vh;
 }
 
-ul::-webkit-scrollbar {
+::-webkit-scrollbar {
   height: 6px;
 }
-ul::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: rgba(30, 41, 59, 0.5);
   border-radius: 3px;
 }
-ul::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: #0d9488;
   border-radius: 3px;
 }

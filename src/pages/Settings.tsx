@@ -25,7 +25,7 @@ export default function Settings() {
 
   return (
     <div className="w-full max-w-4xl mx-auto py-8 animate-fadeIn px-4">
-      <Titles title="Player Settings" className="text-center" />
+      <Titles title="Player Settings" />
 
       <div className="flex flex-col items-center lg:flex-row gap-8 mt-8 bg-slate-800/50 rounded-xl p-8 border border-slate-700 shadow-lg">
         {/* Left Column - Avatar & Bio */}
@@ -105,7 +105,6 @@ export default function Settings() {
           </div>
         </div>
 
-        {/* Right Column - Form Fields */}
         <Form
           method="POST"
           className="w-full lg:w-2/3 flex flex-col items-center">

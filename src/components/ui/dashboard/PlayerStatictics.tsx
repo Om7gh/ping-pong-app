@@ -8,11 +8,11 @@ import {
 } from "recharts";
 
 const lineData = [
-  { day: "Mon", score: 2400, win: true },
-  { day: "Tue", score: 2700, win: true },
-  { day: "Wed", score: 1000, win: false },
-  { day: "Thu", score: 400, win: false },
-  { day: "Fri", score: 3200, win: true },
+  { match: "karim", score: 2400, win: true },
+  { match: "hamza", score: 2700, win: true },
+  { match: "abdlah001", score: 1000, win: false },
+  { match: "simoha", score: 400, win: false },
+  { match: "kkka", score: 3200, win: true },
 ];
 
 export default function PlayerStatistics() {
@@ -24,7 +24,7 @@ export default function PlayerStatistics() {
       <ResponsiveContainer width="100%" height={250}>
         <LineChart data={lineData}>
           <XAxis
-            dataKey="day"
+            dataKey="match"
             tick={{ fill: "#94a3b8" }}
             axisLine={{ stroke: "#475569" }}
           />

@@ -1,16 +1,36 @@
 import { Avatar } from "@/assets";
-import { useState, type JSX } from "react";
+import { useEffect, useState, type JSX } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/outline";
 
 export default function Profile(): JSX.Element {
   const [active, setActive] = useState(false);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(".profile-container")) {
+        setActive(false);
+      }
+    };
+
+    window.addEventListener("click", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const toggleMenu = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setActive(!active);
+  };
+
   return (
-    <div className="relative">
+    <div className="relative profile-container">
       <div
-        className="h-14 w-14 rounded-full grid place-items-center bg-gradient-to-r from-teal-400/30 to-teal-600/30 cursor-pointer hover:from-teal-500/30 hover:to-teal-800/30 transition-all duration-300 p-0.5 z-50"
-        onClick={() => setActive(!active)}>
+        className="h-14 w-25 rounded-full flex items-center px-2 bg-gradient-to-r from-teal-400/30 to-teal-600/30 cursor-pointer hover:from-teal-500/30 hover:to-teal-800/30 transition-all duration-300 p-0.5 z-50"
+        onClick={toggleMenu}>
         <div className="relative">
           <img
             src={Avatar}
@@ -26,9 +46,8 @@ export default function Profile(): JSX.Element {
           </div>
         </div>
       </div>
-
       {active && (
-        <div className="absolute top-16 right-0 w-48 bg-white rounded-lg shadow-xl overflow-hidden animate-dropdown origin-top-right">
+        <div className="absolute top-16 right-0 w-48 bg-white rounded-lg shadow-xl overflow-hidden animate-dropdown origin-top-right z-50">
           <div className="px-4 py-3 bg-gradient-to-r from-teal-400 to-slate-500">
             <p className="text-white font-medium truncate">Omar Ghazi</p>
           </div>
