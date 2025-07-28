@@ -1,6 +1,7 @@
-import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
+import { useActivateAccount } from "@/services/auth/useVerifiyAccount";
+import type { activationUSerData } from "@/types/userType";
 
 function ActivationInput({
   name,
@@ -35,9 +36,7 @@ function ActivationInput({
 export default function Activation() {
   const [code, setCode] = useState<string[]>(Array(6).fill(""));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const navigation = useNavigation();
-  const actionData = useActionData();
-
+  const mutateActivate = useActivateAccount();
   const handleChange = (index: number, value: string) => {
     const newCode = [...code];
     newCode[index] = value;
@@ -56,6 +55,19 @@ export default function Activation() {
     }
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    let activationArr = [];
+    for (let i = 0; i < 6; i++) activationArr.push(formData.get(`n-${i}`));
+    const verificationCode = activationArr.join("");
+    const email = window.localStorage.getItem("pingpong_email");
+    const sendData: activationUSerData = {
+      email: email as string,
+      verificationCode: verificationCode as string,
+    };
+    mutateActivate.mutate(sendData);
+  };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <div className="text-center mb-8">
@@ -73,7 +85,7 @@ export default function Activation() {
         </a>
       </div>
 
-      <Form method="post" className="flex flex-col items-center">
+      <form className="flex flex-col items-center" onSubmit={handleSubmit}>
         <div className="flex mb-6">
           {Array.from({ length: 6 }).map((_, index) => (
             <ActivationInput
@@ -90,24 +102,15 @@ export default function Activation() {
 
         <button
           type="submit"
-          disabled={navigation.state === "submitting" || code.some((c) => !c)}
+          disabled={mutateActivate.status === "pending" || code.some((c) => !c)}
           className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 disabled:bg-orange-300 transition-colors">
-          {navigation.state === "submitting" ? "Verifying..." : "Verify"}
+          {mutateActivate.status === "pending" ? "Verifying..." : "Verify"}
         </button>
-      </Form>
+      </form>
 
-      {actionData?.error && (
-        <p className="mt-4 text-red-500">{actionData.error}</p>
+      {mutateActivate?.error && (
+        <p className="mt-4 text-red-500">{mutateActivate.error.message}</p>
       )}
     </div>
   );
-}
-
-export async function activatedAction({ request }) {
-  const formData = await request.formData();
-  const code = Array.from({ length: 6 }, (_, i) => formData.get(`n-${i}`)).join(
-    ""
-  );
-
-  return redirect("/auth/avatar");
 }

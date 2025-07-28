@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
-import { Form, redirect, useNavigate } from "react-router-dom";
 import { Join } from "@assets";
+import { useCompleteProfile } from "@/services/auth/useCompleteSignUp";
 export default function FinishRegister() {
   const bioRef = useRef(null);
   const [charCount, setCharCount] = useState(50);
   const [avatarPreview, setAvatarPreview] = useState(null);
   const fileInputRef = useRef(null);
-  const navigate = useNavigate();
+  const mutateCompleteProfile = useCompleteProfile();
 
   const handleBioChange = (e) => {
     setCharCount(50 - e.target.value.length);
@@ -25,6 +25,20 @@ export default function FinishRegister() {
 
   const triggerFileInput = () => {
     fileInputRef.current.click();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const username = window.localStorage.getItem("pingpong_username") as string;
+    const userData = {
+      bio: formData.get("bio") as string,
+      avatar: formData.get("avatar") as File,
+      username,
+    };
+
+    mutateCompleteProfile.mutate(userData);
+    // window.localStorage.removeItem("pingpong_username");
   };
 
   return (
@@ -49,7 +63,10 @@ export default function FinishRegister() {
           Complete Your Player Profile
         </h2>
 
-        <Form method="POST" encType="multipart/form-data" className="space-y-6">
+        <form
+          encType="multipart/form-data"
+          className="space-y-6"
+          onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div className="flex items-center flex-col gap-6">
               <div
@@ -144,7 +161,7 @@ export default function FinishRegister() {
               Let's go!
             </button>
           </div>
-        </Form>
+        </form>
 
         <div className="mt-8 h-1 bg-gradient-to-r from-transparent via-teal-400/30 to-transparent relative">
           <div
@@ -157,21 +174,4 @@ export default function FinishRegister() {
       </div>
     </div>
   );
-}
-
-export async function avatarAction({ request }) {
-  const formData = await request.formData();
-  const avatarFile = formData.get("avatar");
-  const bio = formData.get("bio");
-
-  const uploadData = new FormData();
-  if (avatarFile?.name) {
-    uploadData.append("avatar", avatarFile);
-  }
-  uploadData.append("bio", bio);
-
-  const newObj = {};
-  for (const [key, value] of uploadData.entries()) newObj[key] = value;
-  console.log(newObj);
-  return redirect("/dashboard");
 }

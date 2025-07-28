@@ -1,15 +1,25 @@
 import { useState } from "react";
-import { Form, Link, useActionData, useNavigation } from "react-router-dom";
+import { Form, Link, useNavigation } from "react-router-dom";
 import { Logo } from "@assets";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import InputField from "../utils/InputField";
-
+import useLogin from "@/services/auth/useLogin";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
-  const actionData = useActionData() as { errors?: Record<string, string> };
   const navigation = useNavigation();
+  const mutate = useLogin();
   const isSubmitting = navigation.state === "submitting";
+  console.log(mutate.error);
+  const handleSumbit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const userData = {
+      username: formData.get("username") as string,
+      password: formData.get("password") as string,
+    };
+    mutate.mutate(userData);
+  };
 
   return (
     <div className="w-[700px] bg-gradient-to-b from-slate-800/50 to-teal-800/50 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center rounded-3xl">
@@ -33,25 +43,25 @@ export default function SignIn() {
           </p>
         </div>
 
-        <Form method="post" className="mt-8 space-y-6">
+        <Form method="post" className="mt-8 space-y-6" onSubmit={handleSumbit}>
           <div className="space-y-4">
             <div className="relative">
               <InputField
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
+                id="username"
+                name="username"
+                type="username"
+                autoComplete="username"
                 placeholder="Player email"
                 className="pl-10 bg-gray-700/50 border-gray-600 focus:ring-teal-400 focus:border-teal-400"
               />
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <span className="text-gray-400">🎾</span>
               </div>
-              {actionData?.errors?.email && (
+              {/* {mutate?.error.errors?.email && (
                 <p className="mt-1 text-sm text-red-400">
-                  {actionData.errors.email}
+                  {mutate.error.errors?.email}
                 </p>
-              )}
+              )} */}
             </div>
 
             <div className="relative">
@@ -76,11 +86,11 @@ export default function SignIn() {
                   <EyeIcon className="h-5 w-5" />
                 )}
               </button>
-              {actionData?.errors?.password && (
+              {/* {mutate?.error.errors?.password && (
                 <p className="mt-1 text-sm text-red-400">
-                  {actionData.errors.password}
+                  {mutate.error.errors.password}
                 </p>
-              )}
+              )} */}
             </div>
           </div>
 
@@ -166,31 +176,4 @@ export default function SignIn() {
       </div>
     </div>
   );
-}
-
-export async function signInAction({ request }) {
-  const formData = await request.formData();
-
-  const userData: { email: string; password: string } = {
-    email: formData.get("email"),
-    password: formData.get("password"),
-  };
-  console.log(userData);
-  const errors = {};
-  if (!userData.email) errors.email = "Email is required";
-  if (!userData.password) errors.password = "Password is required";
-
-  if (Object.keys(errors).length) {
-    return { errors };
-  }
-
-  try {
-    //     const response = await fetch("/api/signup", {
-    //       method: "POST",
-    //       body: formData,
-    //     });
-    //     return redirect("/dashboard");
-  } catch (error) {
-    return { errors: { form: "Submission failed. Please try again." } };
-  }
 }

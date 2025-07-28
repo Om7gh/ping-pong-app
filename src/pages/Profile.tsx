@@ -26,7 +26,7 @@ export default function Profile(): JSX.Element {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 overflow-scroll max-h-screen">
       <div className="mb-10 flex justify-between items-center">
         <div>
           <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-orange-500 leading-tight">
@@ -36,12 +36,12 @@ export default function Profile(): JSX.Element {
         </div>
         <Link
           to="/dashboard/settings"
-          className="p-2 rounded-full hover:bg-slate-800 transition-all duration-200 group">
+          className="p-2 rounded-full hover:bg-slate-800/50 transition-all duration-200 group">
           <IoSettings className="text-2xl text-slate-400 group-hover:text-orange-500 transition-colors duration-200" />
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-xl border border-slate-800 mb-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-slate-900/50 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-xl border border-slate-800 mb-10">
         <div className="flex flex-col lg:flex-row items-center gap-6 lg:border-r lg:border-slate-700 lg:pr-8">
           <div className="relative group">
             <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-orange-500/20 shadow-xl transition-all duration-300 group-hover:border-orange-500/40">
@@ -55,7 +55,7 @@ export default function Profile(): JSX.Element {
           </div>
 
           <div className="text-center lg:text-left space-y-2">
-            <h2 className="text-3xl font-bold text-white uppercase tracking-wider">
+            <h2 className="text-3xl font-bold text-slate-200 uppercase tracking-wider">
               Omar Ghazi
             </h2>
             <div className="inline-flex items-center px-3 py-1 rounded-full bg-gradient-to-r from-orange-500/10 to-orange-500/20 border border-orange-500/30">
@@ -72,7 +72,7 @@ export default function Profile(): JSX.Element {
         </div>
 
         <div className="space-y-6">
-          <h3 className="text-xl font-semibold text-white pb-2 border-b border-slate-700 flex items-center">
+          <h3 className="text-xl font-semibold text-slate-200 pb-2 border-b border-slate-700 flex items-center">
             <span className="bg-gradient-to-r from-teal-400 to-orange-500 bg-clip-text text-transparent">
               Player Information
             </span>
@@ -160,7 +160,7 @@ export default function Profile(): JSX.Element {
       </div>
 
       <div className="bg-slate-900/80 backdrop-blur-sm rounded-2xl p-6 lg:p-8 shadow-xl border border-slate-800">
-        <h3 className="text-2xl font-bold text-white mb-6 pb-2 border-b border-slate-700 flex items-center">
+        <h3 className="text-2xl font-bold text-slate-200 mb-6 pb-2 border-b border-slate-700 flex items-center">
           <span className="bg-gradient-to-r from-teal-400 to-orange-500 bg-clip-text text-transparent">
             Recent Activity
           </span>
@@ -202,7 +202,7 @@ function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex justify-between items-center py-3 border-b border-slate-800 hover:border-slate-700 transition-colors">
       <p className="text-slate-400 font-medium">{label}:</p>
-      <p className="text-white font-medium">{value}</p>
+      <p className="text-slate-200 font-medium">{value}</p>
     </div>
   );
 }
@@ -228,7 +228,7 @@ function StatCard({
         className={`w-12 h-12 ${accent} rounded-lg flex items-center justify-center mb-4`}>
         {icon}
       </div>
-      <h3 className="text-xl font-semibold text-white mb-1">{title}</h3>
+      <h3 className="text-xl font-semibold text-slate-200 mb-1">{title}</h3>
       <div className="text-4xl font-bold text-orange-500 mb-2">{value}</div>
       <p className="text-slate-400 mb-5">{description}</p>
 
@@ -270,7 +270,7 @@ function ActivityItem({
       />
       <div className="flex-grow">
         <div className="flex justify-between items-start">
-          <h4 className="font-medium text-white">{event}</h4>
+          <h4 className="font-medium text-slate-200">{event}</h4>
           <span className="text-xs text-slate-500">{date}</span>
         </div>
         {opponent && score && (

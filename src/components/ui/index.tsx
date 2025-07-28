@@ -28,3 +28,4 @@ export { default as Balls } from "./utils/Balls.tsx";
 export { default as InputField } from "./utils/InputField.tsx";
 export { default as Message } from "./chat/Messages.tsx";
 export { default as FriendList } from "./chat/FriendList.tsx";
+export { default as AllFriends } from "./chat/AllFriends.tsx";

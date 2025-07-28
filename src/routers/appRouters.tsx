@@ -1,10 +1,16 @@
 import { HomeDashboard } from "@/components/layout";
 import { Activation, FinishRegister, SignIn, SignUp } from "@/components/ui";
-import { activatedAction } from "@/components/ui/auth/Activation";
-import { avatarAction } from "@/components/ui/auth/FinishRegister";
-import { signInAction } from "@/components/ui/auth/SignIn";
-import { signUpAction } from "@/components/ui/auth/SignUp";
-import { Auth, Chat, Dashboard, Friends, Games, Landing, Profile, Settings } from "@/pages";
+import ErrorPage from "@/components/ui/utils/ErrorPage";
+import {
+  Auth,
+  Chat,
+  Dashboard,
+  Friends,
+  Games,
+  Landing,
+  Profile,
+  Settings,
+} from "@/pages";
 import { settingHandler } from "@/pages/Settings";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
@@ -55,28 +61,28 @@ const router = createBrowserRouter([
       {
         path: "signup",
         element: <SignUp />,
-        action: signUpAction,
       },
       {
         path: "signin",
         element: <SignIn />,
-        action: signInAction,
       },
       {
         path: "avatar",
         element: <FinishRegister />,
-        action: avatarAction,
       },
       {
         path: "activation",
         element: <Activation />,
-        action: activatedAction,
       },
       {
         index: true,
         element: <Navigate to="signin" replace />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <ErrorPage />,
   },
 ]);
 

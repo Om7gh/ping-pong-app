@@ -27,9 +27,9 @@ export default function Profile(): JSX.Element {
   };
 
   return (
-    <div className="relative profile-container">
+    <div className="relative">
       <div
-        className="h-14 w-25 rounded-full flex items-center px-2 bg-gradient-to-r from-teal-400/30 to-teal-600/30 cursor-pointer hover:from-teal-500/30 hover:to-teal-800/30 transition-all duration-300 p-0.5 z-50"
+        className="h-14 w-25 rounded-full flex items-center px-2 bg-slate-900 hover:bg-slate-900/30 cursor-pointer hover:from-teal-500/30 hover:to-teal-800/30 transition-all duration-300 p-0.5 z-50 ring-4 ring-offset-2 ring-offset-orange-500"
         onClick={toggleMenu}>
         <div className="relative">
           <img
@@ -47,36 +47,36 @@ export default function Profile(): JSX.Element {
         </div>
       </div>
       {active && (
-        <div className="absolute top-16 right-0 w-48 bg-white rounded-lg shadow-xl overflow-hidden animate-dropdown origin-top-right z-50">
-          <div className="px-4 py-3 bg-gradient-to-r from-teal-400 to-slate-500">
+        <div className="absolute top-16 right-0 w-48 bg-slate-900 rounded-lg shadow-xl overflow-hidden animate-dropdown origin-top-right z-50">
+          <div className="px-4 py-3 bg-orange-500">
             <p className="text-white font-medium truncate">Omar Ghazi</p>
           </div>
           <ul className="divide-y divide-gray-100">
-            <li className="hover:bg-gray-50 transition-colors">
+            <li className="hover:bg-slate-700 transition-colors">
               <Link
                 to="home"
-                className="block px-4 py-3 text-sm text-gray-700"
+                className="block px-4 py-3 text-sm text-slate-100"
                 onClick={() => setActive(false)}>
                 Home
               </Link>
             </li>
-            <li className="hover:bg-gray-50 transition-colors">
+            <li className="hover:bg-slate-700 transition-colors">
               <Link
                 to="profile"
-                className="block px-4 py-3 text-sm text-gray-700"
+                className="block px-4 py-3 text-sm text-slate-100"
                 onClick={() => setActive(false)}>
                 My Profile
               </Link>
             </li>
-            <li className="hover:bg-gray-50 transition-colors">
+            <li className="hover:bg-slate-700 transition-colors">
               <Link
                 to="settings"
-                className="block px-4 py-3 text-sm text-gray-700"
+                className="block px-4 py-3 text-sm text-slate-100"
                 onClick={() => setActive(false)}>
                 Settings
               </Link>
             </li>
-            <li className="hover:bg-gray-50 transition-colors">
+            <li className="hover:bg-slate-700 transition-colors">
               <Link
                 to="/auth/signin"
                 className="block px-4 py-3 text-sm text-red-500 hover:text-red-600"

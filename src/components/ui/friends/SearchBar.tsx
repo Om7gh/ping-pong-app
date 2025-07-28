@@ -52,7 +52,7 @@ export default function SearchBar() {
           <input
             ref={inputRef}
             type="text"
-            placeholder="Search players, tournaments..."
+            placeholder="Search for friend..."
             name="search"
             id="search"
             value={searchQuery}

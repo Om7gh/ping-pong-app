@@ -1,17 +1,47 @@
-import { useState } from "react";
-import { Form, Link, useActionData, useNavigation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Logo } from "@assets";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import InputField from "../utils/InputField";
+import useSignUp from "@/services/auth/useSignUp";
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
-  const actionData = useActionData() as { errors?: Record<string, string> };
-  const navigation = useNavigation();
-  const isSubmitting = navigation.state === "submitting";
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [storedEmail, setStoredEmail] = useState("");
+  const [storedUsername, setStoredUsername] = useState("");
+  const signupMutation = useSignUp();
+  const isSubmitting = signupMutation.isPending;
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const password = formData.get("password") as string;
+    const confirmPassword = formData.get("confirmPassword") as string;
+
+    if (password !== confirmPassword) {
+      setPasswordsMatch(false);
+      return;
+    }
+    setPasswordsMatch(true);
+
+    const userData = {
+      username: formData.get("username") as string,
+      email: formData.get("email") as string,
+      password,
+    };
+    signupMutation.mutate(userData);
+    setStoredEmail(userData.email);
+    setStoredUsername(userData.username);
+  };
+
+  useEffect(() => {
+    window.localStorage.setItem("pingpong_email", storedEmail);
+    window.localStorage.setItem("pingpong_username", storedUsername);
+  }, [storedEmail, storedUsername]);
 
   return (
-    <div className="w-[700px] bg-gradient-to-b from-slate-800/50 to-teal-800/50 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center rounded-3xl relative overflow-hidden">
+    <div className="w-[700px] bg-gradient-to-b from-slate-800/50 to-teal-800/50 py-12 px-4 sm:px-6 lg:px-8 font-main flex items-center justify-center rounded-3xl relative overflow-hidden">
       <div className="relative max-w-md w-full mt-16 space-y-8 backdrop-blur-sm p-8 rounded-xl border border-teal-400/20 shadow-2xl shadow-teal-400/10">
         <div className="absolute -left-6 top-1/2 transform -translate-y-1/2 w-4 h-24 bg-teal-400 rounded-r-lg" />
         <div className="absolute -right-6 top-1/2 transform -translate-y-1/2 w-4 h-24 bg-orange-400 rounded-l-lg" />
@@ -31,7 +61,7 @@ export default function SignUp() {
           </p>
         </div>
 
-        <Form method="POST" className="mt-8 space-y-6">
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div className="relative">
               <InputField
@@ -45,9 +75,9 @@ export default function SignUp() {
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <span className="text-gray-400">👑</span>
               </div>
-              {actionData?.errors?.username && (
+              {signupMutation.error?.message?.includes("username") && (
                 <p className="mt-1 text-sm text-red-400">
-                  {actionData.errors.username}
+                  {signupMutation.error.message}
                 </p>
               )}
             </div>
@@ -64,9 +94,9 @@ export default function SignUp() {
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <span className="text-gray-400">✉️</span>
               </div>
-              {actionData?.errors?.email && (
+              {signupMutation.error?.message?.includes("email") && (
                 <p className="mt-1 text-sm text-red-400">
-                  {actionData.errors.email}
+                  {signupMutation.error.message}
                 </p>
               )}
             </div>
@@ -93,9 +123,9 @@ export default function SignUp() {
                   <EyeIcon className="h-5 w-5" />
                 )}
               </button>
-              {actionData?.errors?.password && (
+              {signupMutation.error?.message?.includes("password") && (
                 <p className="mt-1 text-sm text-red-400">
-                  {actionData.errors.password}
+                  {signupMutation.error.message}
                 </p>
               )}
             </div>
@@ -105,16 +135,19 @@ export default function SignUp() {
                 id="confirmPassword"
                 name="confirmPassword"
                 type={showPassword ? "text" : "password"}
+                required
                 autoComplete="new-password"
                 placeholder="Confirm secret smash"
-                className="pl-10 bg-gray-700/50 border-gray-600 focus:ring-teal-400 focus:border-teal-400"
+                className={`pl-10 bg-gray-700/50 border-gray-600 focus:ring-teal-400 focus:border-teal-400 ${
+                  !passwordsMatch ? "border-red-400" : ""
+                }`}
               />
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <span className="text-gray-400">🔏</span>
               </div>
-              {actionData?.errors?.confirmPassword && (
+              {!passwordsMatch && (
                 <p className="mt-1 text-sm text-red-400">
-                  {actionData.errors.confirmPassword}
+                  Passwords don't match!
                 </p>
               )}
             </div>
@@ -157,7 +190,7 @@ export default function SignUp() {
               )}
             </button>
           </div>
-        </Form>
+        </form>
 
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
@@ -178,71 +211,4 @@ export default function SignUp() {
       </div>
     </div>
   );
-}
-
-interface FormErrors {
-  username?: string;
-  email?: string;
-  password?: string;
-  confirmPassword?: string;
-  form?: string;
-}
-
-export async function signUpAction({ request }: { request: Request }) {
-  const formData = await request.formData();
-
-  // Validate form data
-  const errors: FormErrors = {};
-  if (!formData.get("username")) errors.username = "Username is required";
-  if (!formData.get("email")) errors.email = "Email is required";
-  if (!formData.get("password")) errors.password = "Password is required";
-  if (formData.get("password") !== formData.get("confirmPassword")) {
-    errors.confirmPassword = "Passwords do not match";
-  }
-
-  //   const userData = {
-  //     username: formData.get("username"),
-  //     email: formData.get("email"),
-  //     password: formData.get("password"),
-  //     confirmPassword: formData.get("confirmPassword"),
-  //     // avatar: formData.get("avatar") // Exclude file for JSON
-  //   };
-
-  // File validation
-  //   const avatar = formData.get("avatar") as File | null;
-  //   if (avatar?.size) {
-  //     const validTypes = ["image/jpeg", "image/png"];
-  //     if (!validTypes.includes(avatar.type)) {
-  //       errors.avatar = "Only JPEG/PNG images are allowed";
-  //     }
-  //     if (avatar.size > 5 * 1024 * 1024) {
-  //       errors.avatar = "File size must be less than 5MB";
-  //     }
-  //   }
-
-  if (Object.keys(errors).length) {
-    return { errors };
-  }
-
-  try {
-    // Send as FormData for file upload support
-    //     const response = await fetch("http://localhost:3001/auth", {
-    //       method: "POST",
-    //       body: JSON.stringify(userData), // Send the original FormData
-    //       // Don't set Content-Type header - the browser will set it with the boundary
-    //     });
-    //     if (!response.ok) {
-    //       const errorData = await response.json().catch(() => ({}));
-    //       throw new Error(errorData.message || "Failed to submit form");
-    //     }
-    //     const responseData = await response.json();
-    //     return redirect("/dashboard");
-  } catch (error) {
-    console.error("Submission error:", error);
-    return {
-      errors: {
-        form: error instanceof Error ? error.message : "Submission failed",
-      },
-    };
-  }
 }
