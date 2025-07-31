@@ -27,34 +27,28 @@ export default function FinishRegister() {
     fileInputRef.current.click();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const username = window.localStorage.getItem("pingpong_username") as string;
-    const userData = {
-      bio: formData.get("bio") as string,
-      avatar: formData.get("avatar") as File,
-      username,
-    };
 
-    mutateCompleteProfile.mutate(userData);
-    // window.localStorage.removeItem("pingpong_username");
+    mutateCompleteProfile.mutate(formData);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4 gap-x-8">
       <img
         src={Join}
         alt="image"
         className="object-cover absolute w-full h-full opacity-5"
       />
+
       <div className="w-full max-w-md bg-slate-800/50 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden p-8 border-2 border-teal-400">
         <div className="flex justify-center mb-6">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-orange-500 rounded-full"></div>
-            <h1 className="text-3xl font-bold bg-gradient-to-r from-teal-400 to-orange-500 bg-clip-text text-transparent">
+            <h2 className="text-4xl font-bold bg-gradient-to-r from-teal-400 to-orange-500 bg-clip-text text-transparent">
               PingPop
-            </h1>
+            </h2>
             <div className="w-8 h-8 bg-teal-400 rounded-full"></div>
           </div>
         </div>
@@ -147,17 +141,17 @@ export default function FinishRegister() {
             <button
               type="button"
               className="px-6 py-2 border-2 border-orange-500 rounded-lg shadow-sm text-sm font-medium
-                text-orange-300 bg-slate-800 hover:bg-orange-500/20 focus:outline-none focus:ring-2
-                focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all"
+              text-orange-300 bg-slate-800 hover:bg-orange-500/20 focus:outline-none focus:ring-2
+              focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all"
               onClick={() => navigate("/dashboard")}>
               Skip
             </button>
             <button
               type="submit"
               className="px-6 py-2 border-2 border-teal-400 rounded-lg shadow-sm text-sm font-medium
-                text-slate-900 bg-gradient-to-r from-teal-400 to-orange-500 hover:from-teal-300 hover:to-orange-400
-                focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2
-                focus:ring-offset-slate-800 font-bold transition-all">
+              text-slate-900 bg-gradient-to-r from-teal-400 to-orange-500 hover:from-teal-300 hover:to-orange-400
+              focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2
+              focus:ring-offset-slate-800 font-bold transition-all">
               Let's go!
             </button>
           </div>

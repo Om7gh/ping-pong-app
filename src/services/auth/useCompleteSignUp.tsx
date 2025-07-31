@@ -5,19 +5,11 @@ import { useNavigate } from "react-router-dom";
 import type { Error } from "@/types/errorType";
 
 async function fillAvatar(userData: completeProfile) {
-  const newData = {
-    avatar: userData.avatar,
-    bio: userData.bio,
-  };
   const res = await fetch(
-    `http://localhost:4000/api/v1/users/complete-profile/${userData.username}`,
+    `http://localhost:4000/api/v1/users/complete-profile/${username}`,
     {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify(newData),
+      body: userData,
     }
   );
   if (!res.ok) {

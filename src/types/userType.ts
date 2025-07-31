@@ -1,5 +1,5 @@
 export interface signInData {
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -17,5 +17,5 @@ export interface activationUSerData {
 export interface completeProfile {
   avatar: File;
   bio: string;
-  username: string
+  username: string;
 }

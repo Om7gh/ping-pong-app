@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Logo } from "@assets";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
@@ -8,8 +8,6 @@ import useSignUp from "@/services/auth/useSignUp";
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
   const [passwordsMatch, setPasswordsMatch] = useState(true);
-  const [storedEmail, setStoredEmail] = useState("");
-  const [storedUsername, setStoredUsername] = useState("");
   const signupMutation = useSignUp();
   const isSubmitting = signupMutation.isPending;
 
@@ -30,15 +28,9 @@ export default function SignUp() {
       email: formData.get("email") as string,
       password,
     };
-    signupMutation.mutate(userData);
-    setStoredEmail(userData.email);
-    setStoredUsername(userData.username);
-  };
 
-  useEffect(() => {
-    window.localStorage.setItem("pingpong_email", storedEmail);
-    window.localStorage.setItem("pingpong_username", storedUsername);
-  }, [storedEmail, storedUsername]);
+    signupMutation.mutate(userData);
+  };
 
   return (
     <div className="w-[700px] bg-gradient-to-b from-slate-800/50 to-teal-800/50 py-12 px-4 sm:px-6 lg:px-8 font-main flex items-center justify-center rounded-3xl relative overflow-hidden">

@@ -1,11 +1,11 @@
 // useSignUp.ts
 import { useMutation } from "@tanstack/react-query";
-import type { signUpData } from "@/types/userType";
+import type { signInData } from "@/types/userType";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import type { Error } from "@/types/errorType";
 
-async function login(userData: signUpData) {
+async function login(userData: signInData) {
   const res = await fetch("http://localhost:4000/api/v1/auth/login", {
     method: "POST",
     headers: {
@@ -18,17 +18,20 @@ async function login(userData: signUpData) {
     const error = await res.json();
     throw error;
   }
-
-  return await res.json();
+  const data = await res.json();
+  return data;
 }
 
-function useSignUp() {
+function useLogin() {
   const navigate = useNavigate();
   return useMutation({
     mutationFn: login,
-    onSuccess: (data) => {
-      toast.success(`Welcome to the tournament, ${data.username}!`);
-      navigate("/dashboard");
+    onSuccess: (payload) => {
+      toast.success(payload.message);
+      document.cookie = `username=${encodeURIComponent(
+        payload.username
+      )}; max-age=3600; path=/`;
+      navigate("/auth/2-factor-activation");
     },
     onError: (error: Error) => {
       toast.error(error.message || "Login failed. Please try again.");
@@ -38,4 +41,4 @@ function useSignUp() {
   });
 }
 
-export default useSignUp;
+export default useLogin;

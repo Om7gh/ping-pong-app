@@ -4,13 +4,15 @@ import { Logo } from "@assets";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import InputField from "../utils/InputField";
 import useLogin from "@/services/auth/useLogin";
+import ForgetPassword from "./ForgetPassword";
+import Model from "../utils/Model";
 
 export default function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
+  const [openModel, setOpenModel] = useState(false);
   const navigation = useNavigation();
   const mutate = useLogin();
   const isSubmitting = navigation.state === "submitting";
-  console.log(mutate.error);
   const handleSumbit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -22,8 +24,14 @@ export default function SignIn() {
   };
 
   return (
-    <div className="w-[700px] bg-gradient-to-b from-slate-800/50 to-teal-800/50 py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center rounded-3xl">
-      <div className="relative max-w-md w-full space-y-8 bg-Logoay-800/70 backdrop-blur-sm p-8 rounded-xl border border-teal-400/20 shadow-2xl shadow-teal-400/10">
+    <div className="w-[700px] bg-gradient-to-b from-slate-800/50 to-teal-800/50py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center rounded-3xl">
+      {openModel && (
+        <Model>
+          <ForgetPassword setOpenModel={setOpenModel} />
+        </Model>
+      )}
+
+      <div className="relative max-w-md w-full mt-16 space-y-8 backdrop-blur-sm p-8 rounded-xl border border-teal-400/20 shadow-2xl shadow-teal-400/10">
         <div className="absolute -left-6 top-1/2 transform -translate-y-1/2 w-4 h-24 bg-teal-400 rounded-r-lg" />
         <div className="absolute -right-6 top-1/2 transform -translate-y-1/2 w-4 h-24 bg-orange-400 rounded-l-lg" />
 
@@ -57,11 +65,11 @@ export default function SignIn() {
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <span className="text-gray-400">🎾</span>
               </div>
-              {/* {mutate?.error.errors?.email && (
+              {mutate?.error && (
                 <p className="mt-1 text-sm text-red-400">
-                  {mutate.error.errors?.email}
+                  {mutate.error.message}
                 </p>
-              )} */}
+              )}
             </div>
 
             <div className="relative">
@@ -86,11 +94,11 @@ export default function SignIn() {
                   <EyeIcon className="h-5 w-5" />
                 )}
               </button>
-              {/* {mutate?.error.errors?.password && (
+              {mutate?.error && (
                 <p className="mt-1 text-sm text-red-400">
-                  {mutate.error.errors.password}
+                  {mutate.error.message}
                 </p>
-              )} */}
+              )}
             </div>
           </div>
 
@@ -109,12 +117,10 @@ export default function SignIn() {
               </label>
             </div>
 
-            <div className="text-sm">
-              <Link
-                to="/forgot-password"
-                className="font-medium text-orange-400 hover:text-orange-300">
+            <div className="text-sm" onClick={() => setOpenModel(true)}>
+              <p className="font-medium text-orange-400 hover:text-orange-300">
                 Forgot your move?
-              </Link>
+              </p>
             </div>
           </div>
 

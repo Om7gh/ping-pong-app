@@ -5,11 +5,14 @@ export { default as IncommingTournament } from "./game/IncommingTournament.tsx";
 export { default as PlayersPreview } from "./game/PlayersPreview.tsx";
 export { default as ProfileOverview } from "./game/ProfileOverview.tsx";
 export { default as Titles } from "./utils/Titles.tsx";
+
 export { default as Activation } from "./auth/Activation.tsx";
 export { default as FinishRegister } from "./auth/FinishRegister.tsx";
+export { default as ForgetPassword } from "./auth/ForgetPassword.tsx";
 export { default as SignIn } from "./auth/SignIn.tsx";
 export { default as SignUp } from "./auth/SignUp.tsx";
 export { default as FileInput } from "./auth/FileInput.tsx";
+
 export { default as MyGamesHistory } from "./dashboard/MyGamesHistory.tsx";
 export { default as MyScore } from "./dashboard/MyScore.tsx";
 export { default as PlayerChart } from "./dashboard/PlayerChart.tsx";

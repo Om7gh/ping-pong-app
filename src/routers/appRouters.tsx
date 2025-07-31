@@ -1,5 +1,7 @@
 import { HomeDashboard } from "@/components/layout";
 import { Activation, FinishRegister, SignIn, SignUp } from "@/components/ui";
+import ResetPassword from "@/components/ui/auth/ResetPassword";
+import TwoFactorActivation from "@/components/ui/auth/TwoFactorActivation";
 import ErrorPage from "@/components/ui/utils/ErrorPage";
 import {
   Auth,
@@ -73,6 +75,14 @@ const router = createBrowserRouter([
       {
         path: "activation",
         element: <Activation />,
+      },
+      {
+        path: "2-factor-activation",
+        element: <TwoFactorActivation />,
+      },
+      {
+        path: "reset-password",
+        element: <ResetPassword />,
       },
       {
         index: true,

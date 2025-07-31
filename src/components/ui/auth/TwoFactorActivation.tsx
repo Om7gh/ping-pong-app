@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { useActivateAccount } from "@/services/auth/useVerifiyAccount";
 import type { activationUSerData } from "@/types/userType";
+import { useTwoFactorAuth } from "@/services/auth/useTwoFactorAuth";
 import useCookie from "@/hooks/useUsersData";
 
 function ActivationInput({
@@ -34,13 +34,11 @@ function ActivationInput({
   );
 }
 
-export default function Activation() {
+export default function TwoFactorActivation() {
   const [code, setCode] = useState<string[]>(Array(6).fill(""));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const mutateActivate = useActivateAccount();
+  const mutateActivate = useTwoFactorAuth();
   const email = useCookie("email");
-  console.log(email);
-
   const handleChange = (index: number, value: string) => {
     const newCode = [...code];
     newCode[index] = value;
